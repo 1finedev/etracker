@@ -1,23 +1,11 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 
-const userSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
-    name: {
+    username: {
       type: String,
-      required: [true, "a user must have a user name"],
+      required: [true, "a user must have a username"],
       minlength: 4,
-    },
-
-    email: {
-      type: String,
-      required: [true, "a user must have an email address"],
-      unique: true,
-      lowercase: true,
-      validate: {
-        validator: validator.isEmail,
-        message: "email address must be valid",
-      },
     },
     photo: {
       type: String,
@@ -54,17 +42,17 @@ const userSchema = new mongoose.Schema(
 );
 
 // creating a virtual field for all posts for a particular user...
-userSchema.virtual("posts", {
+UserSchema.virtual("posts", {
   ref: "Post",
-  localField: "_id",
   foreignField: "author",
+  localField: "_id",
 });
 
-userSchema.pre(/^find/, function (next) {
+UserSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
 
-const user = mongoose.models.userSchema || mongoose.model("User", userSchema);
+const User = mongoose.models.UserSchema || mongoose.model("User", UserSchema);
 
-module.exports = user;
+module.exports = User;

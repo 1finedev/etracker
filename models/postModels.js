@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const postSchema = mongoose.Schema(
+const PostSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -22,17 +22,16 @@ const postSchema = mongoose.Schema(
       trim: true,
       required: [true, "A post must have content"],
     },
-    upvote: {
+    upvotes: {
       type: Number,
       min: 0,
     },
-    downvote: {
+    downvotes: {
       type: Number,
       min: 0,
     },
     status: {
       type: String,
-      required: [true, "A post must have a status"],
       default: "active",
       enum: {
         values: ["active", "downVoted", "flagged", "deleted"],
@@ -67,22 +66,22 @@ const postSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-postSchema.index({ slug: 1 });
+PostSchema.index({ slug: 1 });
 
 // creating a virtual field for the comments..
-postSchema.virtual("comments", {
+PostSchema.virtual("comments", {
   ref: "Comments",
   foreignField: "post",
   localField: "_id",
 });
 
 // slugify the post title
-postSchema.pre("save", function (next) {
+PostSchema.pre("save", function (next) {
   this.slug = slugify(this.title, { lower: true });
   next();
 });
 
-postSchema.pre(/^find/, function (next) {
+PostSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
     select: "name photo",
@@ -90,6 +89,6 @@ postSchema.pre(/^find/, function (next) {
   next();
 });
 
-const post = mongoose.models.postSchema || mongoose.model("Post", postSchema);
+const Post = mongoose.models.PostSchema || mongoose.model("Post", PostSchema);
 
-module.exports = post;
+module.exports = Post;

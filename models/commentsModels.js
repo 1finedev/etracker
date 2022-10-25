@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 
-const commentSchema = mongoose.Schema(
+const CommentSchema = mongoose.Schema(
   {
     content: {
       type: String,
       trim: true,
       required: [true, "comment cannot be empty"],
     },
-    like: {
+    likes: {
       type: Number,
       min: 0,
     },
-    dislike: {
+    dislikes: {
       type: Number,
       min: 0,
     },
@@ -36,7 +36,7 @@ const commentSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-commentSchema.pre(/^find/, function (next) {
+CommentSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
     select: "name photo",
@@ -44,7 +44,7 @@ commentSchema.pre(/^find/, function (next) {
   next();
 });
 
-const comments =
-  mongoose.models.commentSchema || mongoose.model("Comments", commentSchema);
+const Comments =
+  mongoose.models.CommentSchema || mongoose.model("Comments", CommentSchema);
 
-module.exports = comments;
+module.exports = Comments;
