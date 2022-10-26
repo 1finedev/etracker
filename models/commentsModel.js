@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const CommentSchema = mongoose.Schema(
+const commentSchema = mongoose.Schema(
   {
     content: {
       type: String,
@@ -36,7 +36,7 @@ const CommentSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-CommentSchema.pre(/^find/, function (next) {
+commentSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
     select: "name photo",
@@ -45,6 +45,6 @@ CommentSchema.pre(/^find/, function (next) {
 });
 
 const Comments =
-  mongoose.models.CommentSchema || mongoose.model("Comments", CommentSchema);
+  mongoose.models.commentSchema || mongoose.model("Comments", commentSchema);
 
 module.exports = Comments;

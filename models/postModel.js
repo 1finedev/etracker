@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const PostSchema = mongoose.Schema(
+const postSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -66,29 +66,29 @@ const PostSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-PostSchema.index({ slug: 1 });
+postSchema.index({ slug: 1 });
 
 // creating a virtual field for the comments..
-PostSchema.virtual("comments", {
+postSchema.virtual("comments", {
   ref: "Comments",
   foreignField: "post",
   localField: "_id",
 });
 
 // slugify the post title
-PostSchema.pre("save", function (next) {
+postSchema.pre("save", function (next) {
   this.slug = slugify(this.title, { lower: true });
   next();
 });
 
-PostSchema.pre(/^find/, function (next) {
+postSchema.pre(/^find/, function (next) {
   this.populate({
     path: "author",
-    select: "name photo",
+    select: "username photo verified",
   });
   next();
 });
 
-const Post = mongoose.models.PostSchema || mongoose.model("Post", PostSchema);
+const Posts = mongoose.models.postSchema || mongoose.model("Post", postSchema);
 
-module.exports = Post;
+module.exports = Posts;
