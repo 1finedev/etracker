@@ -1,8 +1,6 @@
 import { hashPassword } from "../../lib/authControllers";
 import { create, find } from "../../lib/dbApi";
 
-const requestIp = require("request-ip");
-
 const handler = async (req, res) => {
   const { method } = req;
 
@@ -25,7 +23,7 @@ const handler = async (req, res) => {
     const existingUser = await find("User", {
       username: username.toLowerCase(),
     });
-
+    console.log(existingUser);
     if (existingUser?.documents.length > 0)
       return res.status(409).json({
         status: "Error",
@@ -34,8 +32,8 @@ const handler = async (req, res) => {
 
     // // create a new user
     const modifiedPass = await hashPassword(password);
-    const ipAddress = requestIp.getClientIp(req);
-    console.log(ipAddress);
+
+    // get user IP from request
     const forwarded = req.headers["x-forwarded-for"];
     const ip = forwarded
       ? forwarded.split(/, /)[0]
@@ -45,7 +43,7 @@ const handler = async (req, res) => {
     const user = await create("User", {
       username: username.toLowerCase(),
       password: modifiedPass,
-      ...(ipAddress && { userIp: ipAddress }),
+      userIp: ip,
     });
 
     return res.status(201).json({
