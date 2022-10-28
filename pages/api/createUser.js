@@ -49,7 +49,7 @@ const handler = async (req, res) => {
       userIp: ip,
       createdAt: new Date(Date.now()),
     });
-
+    console.log(user);
     return res.status(201).json({
       status: "Success",
       user,
