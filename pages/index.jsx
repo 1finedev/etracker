@@ -2,14 +2,25 @@ import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { signIn } from "next-auth/react";
 
 export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.target);
     const formEntries = Object.fromEntries(formData.entries());
 
-    console.log(formEntries);
+    const { username, password } = formEntries;
+    console.log(username, password);
+
+    // const res = await signIn("credentials", {
+    //   redirect: false,
+    //   username: username.replace(/\s/g, "").trim(),
+    //   password: password.trim(),
+    // });
+
+    // console.log(res);
 
     try {
       const response = await axios.post("/api/createUser", formEntries);

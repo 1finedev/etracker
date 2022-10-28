@@ -1,7 +1,16 @@
+import { authOptions } from "../api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
 import { hashPassword } from "../../lib/authControllers";
 import { create, find } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
+  console.log(session);
+  if (!session)
+    return res.status(400).json({
+      status: "Error",
+      message: "Invalid session",
+    });
   const { method } = req;
 
   if (method !== "POST")
@@ -23,7 +32,6 @@ const handler = async (req, res) => {
     const existingUser = await find("User", {
       username: username.toLowerCase(),
     });
-    console.log(existingUser);
     if (existingUser?.documents.length > 0)
       return res.status(409).json({
         status: "Error",
@@ -38,12 +46,12 @@ const handler = async (req, res) => {
     const ip = forwarded
       ? forwarded.split(/, /)[0]
       : req.connection.remoteAddress;
-    console.log(ip);
 
     const user = await create("User", {
       username: username.toLowerCase(),
       password: modifiedPass,
       userIp: ip,
+      createdAt: new Date(Date.now()),
     });
 
     return res.status(201).json({
