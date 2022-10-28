@@ -6,11 +6,7 @@ import { create, find } from "../../lib/dbApi";
 const handler = async (req, res) => {
   const session = await unstable_getServerSession(req, res, authOptions);
   console.log(session);
-  if (!session)
-    return res.status(400).json({
-      status: "Error",
-      message: "Invalid session",
-    });
+
   const { method } = req;
 
   if (method !== "POST")
