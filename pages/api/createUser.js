@@ -6,10 +6,6 @@ const requestIp = require("request-ip");
 const handler = async (req, res) => {
   const { method } = req;
 
-  const { geo, ip, ua } = req;
-
-  console.log(geo, ip, ua);
-
   if (method !== "POST")
     return res.status(400).json({
       status: "Error",
