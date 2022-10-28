@@ -58,7 +58,6 @@ export const authOptions = {
       return true;
     },
     async session({ session, token }) {
-      console.log("first");
       token && (session.user = token.user);
       return session;
     },
@@ -67,6 +66,6 @@ export const authOptions = {
       return token;
     },
   },
-  //   pages: { signIn: "/login", signOut: "/", error: "/login" },
+  pages: { signIn: "/login", signOut: "/", error: "/login" },
 };
 export default NextAuth(authOptions);
