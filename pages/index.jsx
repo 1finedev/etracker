@@ -1,7 +1,5 @@
 import axios from "axios";
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { signIn } from "next-auth/react";
 
 export default function Home() {
@@ -31,10 +29,11 @@ export default function Home() {
     }
   };
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="username" />
-        <input type="text" name="password" />
+    <div className="w-full h-[100vh] bg-green-500">
+      {/* just to test login and stuff you can delete */}
+      <form onSubmit={handleSubmit} className="text-white">
+        <input type="text" name="username" placeholder="username" />
+        <input type="text" name="password" placeholder="password" />
         <button type="submit">Sumbit</button>
       </form>
 
@@ -44,22 +43,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <span>First page!!!</span>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <span>First page!!!</span>
     </div>
   );
 }
