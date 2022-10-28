@@ -1,5 +1,12 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+const requestIp = require("request-ip");
 
 export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+  const ipAddress = requestIp.getClientIp(req);
+  console.log(ipAddress);
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = forwarded
+    ? forwarded.split(/, /)[0]
+    : req.connection.remoteAddress;
+  console.log(ip);
+  res.status(200).json({ ip, ipAddress });
 }
