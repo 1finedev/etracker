@@ -1,4 +1,4 @@
-import { getSession } from "./../../lib/authControllers";
+import { getServerSession } from "./../../lib/authControllers";
 import { findByIdAndDelete } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
@@ -10,7 +10,7 @@ const handler = async (req, res) => {
       message: "Invalid req method!, route expects POST req",
     });
 
-  const session = getSession(req, res);
+  const session = getServerSession(req, res);
   console.log(session); // check if session is working...
 
   if (!session || session.user.role !== "admin")

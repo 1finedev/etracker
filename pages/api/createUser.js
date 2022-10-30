@@ -46,10 +46,7 @@ const handler = async (req, res) => {
       createdAt: new Date(Date.now()),
     });
 
-    return res.status(201).json({
-      status: "Success",
-      user,
-    });
+    return res.redirect("/post");
   } catch (error) {
     return res.status(500).json({
       status: "Error",
