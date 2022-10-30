@@ -42,7 +42,7 @@ export default function Home() {
         <input type="text" name="displayName" placeholder="display name" />
         <input type="text" name="username" placeholder="username" />
         <input type="text" name="password" placeholder="password" />
-        <button type="submit">Sumbit</button>
+        <button type="submit">Submit</button>
       </form>
 
       <Head>
