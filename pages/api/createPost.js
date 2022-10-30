@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { getSession } from "./../../lib/authControllers";
 import { create } from "../../lib/dbApi";
 
@@ -52,6 +53,17 @@ const handler = async (req, res) => {
       error: error.message,
     });
   }
+=======
+import { getSession } from "../../lib/authControllers";
+
+const handler = async (req, res) => {
+  const session = await getSession(req, res);
+  console.log(session);
+
+  res.json({
+    status: "ok",
+  });
+>>>>>>> a74e6e5 (main)
 };
 
 export default handler;

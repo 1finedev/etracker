@@ -41,7 +41,6 @@ export const authOptions = {
           return user;
         } catch (error) {
           throw new Error(error);
-          return null;
         }
       },
     }),
@@ -59,6 +58,8 @@ export const authOptions = {
     },
     async session({ session, token }) {
       token && (session.user = token.user);
+      session.password = undefined;
+      session.userIp = undefined;
       return session;
     },
     async jwt({ token, user }) {

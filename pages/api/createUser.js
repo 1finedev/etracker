@@ -1,23 +1,18 @@
-import { authOptions } from "../api/auth/[...nextauth]";
-import { unstable_getServerSession } from "next-auth/next";
 import { hashPassword } from "../../lib/authControllers";
 import { create, find } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
-  const session = await unstable_getServerSession(req, res, authOptions);
-  console.log(session);
-
   const { method } = req;
 
   if (method !== "POST")
     return res.status(400).json({
       status: "Error",
-      message: "Invalid req method!, route expects POST req",
+      message: "Invalid req method!, route expects POST request!",
     });
 
-  const { username, password } = req.body;
+  const { displayName, username, password } = req.body;
 
-  if (!username || !password)
+  if (!displayName || !username || !password)
     return res.status(400).json({
       status: "Error",
       message: "Incomplete credentials!",
@@ -34,7 +29,7 @@ const handler = async (req, res) => {
         message: "Username has already been taken",
       });
 
-    // // create a new user
+    //  create a new user
     const modifiedPass = await hashPassword(password);
 
     // get user IP from request
@@ -46,10 +41,11 @@ const handler = async (req, res) => {
     const user = await create("User", {
       username: username.toLowerCase(),
       password: modifiedPass,
+      displayName,
       userIp: ip,
       createdAt: new Date(Date.now()),
     });
-    console.log(user);
+
     return res.status(201).json({
       status: "Success",
       user,
