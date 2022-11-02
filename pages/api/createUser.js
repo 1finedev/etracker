@@ -1,8 +1,7 @@
-import { hashPassword } from "../../lib/authControllers";
+import { hashPassword, requestData } from "../../lib/authControllers";
 import { create, find } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
-  console.log(req);
   const { method } = req;
 
   if (method !== "POST")
@@ -12,6 +11,7 @@ const handler = async (req, res) => {
     });
 
   const { displayName, username, password } = req.body;
+  const { ip, timezone, city, country, latitude, longitude } = requestData();
 
   if (!displayName || !username || !password)
     return res.status(400).json({
@@ -33,17 +33,16 @@ const handler = async (req, res) => {
     //  create a new user
     const modifiedPass = await hashPassword(password);
 
-    // get user IP from request
-    const forwarded = req.headers["x-forwarded-for"];
-    const ip = forwarded
-      ? forwarded.split(/, /)[0]
-      : req.connection.remoteAddress;
-
-    const user = await create("User", {
+    await create("User", {
       username: username.toLowerCase(),
       password: modifiedPass,
       displayName,
       userIp: ip,
+      userLatitude: parseFloat(latitude),
+      userLongitude: parseFloat(longitude),
+      userCountry: country,
+      userCity: city,
+      userTimezone: timezone,
       createdAt: new Date(Date.now()),
     });
 
