@@ -1,5 +1,6 @@
 import { getServerSession } from "./../../lib/authControllers";
 import { create } from "../../lib/dbApi";
+import ip2location from "ip-to-location";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -10,6 +11,13 @@ const handler = async (req, res) => {
       message: "Invalid req method!, route expects POST req",
     });
 
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = forwarded
+    ? forwarded.split(/, /)[0]
+    : req.connection.remoteAddress;
+  console.log(ip);
+  const data = await ip2location.fetch(ip);
+  console.log(data);
   const session = getServerSession(req, res);
   console.log(session); // check if session is working...
 
@@ -21,7 +29,7 @@ const handler = async (req, res) => {
 
   // create a new post...
   try {
-    const { title, content } = req.body;
+    const { title, content, verified } = req.body;
 
     if (!title || !content)
       return res.status(400).json({
@@ -35,16 +43,17 @@ const handler = async (req, res) => {
         message: "Invalid post data",
       });
 
-    const newPost = await create("Post", {
-      title,
-      content,
-      createdAt: new Date(Date.now()),
-      author: session.user._id,
-    });
+    // const newPost = await create("Post", {
+    //   title,
+    //   content,
+    //   createdAt: new Date(Date.now()),
+    //   author: session.user._id,
+    //   // verifiedAuthor: session.user.verified ? true : false,
+    //   verifiedAuthor: verified ? true : false,
+    // });
 
     res.status(201).json({
       status: "Success",
-      newPost,
     });
   } catch (error) {
     res.status(500).json({

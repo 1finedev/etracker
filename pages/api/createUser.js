@@ -2,6 +2,7 @@ import { hashPassword } from "../../lib/authControllers";
 import { create, find } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
+  console.log(req);
   const { method } = req;
 
   if (method !== "POST")
