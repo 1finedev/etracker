@@ -1,6 +1,9 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const Router = useRouter();
+  console.log(Router);
   // temp function for testing please change
   const handleSubmit = async (e) => {
     e.preventDefault();

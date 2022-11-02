@@ -47,7 +47,7 @@ const handler = async (req, res) => {
       createdAt: new Date(Date.now()),
     });
 
-    return res.redirect("/post");
+    return res.redirect("/timeline");
   } catch (error) {
     return res.status(500).json({
       status: "Error",
