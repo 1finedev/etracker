@@ -11,7 +11,7 @@ const handler = async (req, res) => {
     });
   const { city, country, latitude, longitude } = requestData(req);
 
-  const session = getServerSession(req, res);
+  const session = await getServerSession(req, res);
   console.log(session); // check if session is working...
 
   if (!session)
