@@ -9,6 +9,7 @@ const handler = async (req, res) => {
       status: "Error",
       message: "Invalid req method!, route expects POST request!",
     });
+  const { ip, timezone, city, country, latitude, longitude } = requestData(req);
 
   const session = getServerSession;
   //   aggregate posts

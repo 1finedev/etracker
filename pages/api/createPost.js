@@ -1,6 +1,5 @@
 import { getServerSession, requestData } from "./../../lib/authControllers";
 import { create } from "../../lib/dbApi";
-import ip2location from "ip-to-location";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -10,7 +9,7 @@ const handler = async (req, res) => {
       status: "Error",
       message: "Invalid req method!, route expects POST req",
     });
-  const { ip, timezone, city, country, latitude, longitude } = requestData();
+  const { city, country, latitude, longitude } = requestData(req);
 
   const session = getServerSession(req, res);
   console.log(session); // check if session is working...
@@ -52,6 +51,7 @@ const handler = async (req, res) => {
 
     res.status(201).json({
       status: "Success",
+      newPost,
     });
   } catch (error) {
     res.status(500).json({

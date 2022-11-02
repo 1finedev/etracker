@@ -11,7 +11,7 @@ const handler = async (req, res) => {
     });
 
   const { displayName, username, password } = req.body;
-  const { ip, timezone, city, country, latitude, longitude } = requestData();
+  const { ip, timezone, city, country, latitude, longitude } = requestData(req);
 
   if (!displayName || !username || !password)
     return res.status(400).json({
