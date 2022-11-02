@@ -1,5 +1,5 @@
 import { getServerSession, requestData } from "./../../lib/authControllers";
-import { create } from "../../lib/dbApi";
+import { create, findById } from "../../lib/dbApi";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -36,7 +36,7 @@ const handler = async (req, res) => {
         message: "Invalid post data",
       });
 
-    const newPost = await create("Post", {
+    const createPost = await create("Post", {
       title,
       content,
       createdAt: new Date(Date.now()),
@@ -48,6 +48,8 @@ const handler = async (req, res) => {
       latitude,
       longitude,
     });
+
+    const newPost = await findById("Post", createPost.insertedId);
 
     res.status(201).json({
       status: "Success",
