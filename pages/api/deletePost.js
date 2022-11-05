@@ -10,7 +10,7 @@ const handler = async (req, res) => {
       message: "Invalid req method!, route expects POST req",
     });
 
-  const session = getServerSession(req, res);
+  const session = await getServerSession(req, res);
   console.log(session); // check if session is working...
 
   if (!session || session.user.role !== "admin")

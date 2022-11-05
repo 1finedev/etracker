@@ -4,3 +4,4 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+// use getServerSideProps for auth
