@@ -2,17 +2,10 @@ import { useEffect, useState, createContext, useRef } from "react";
 
 export const FormContext = createContext(null);
 
-<<<<<<< HEAD:components/Form/index.js
 export default function Form({ formData, onSubmit, children, ...others }) {
     const [values, setValues] = useState(formData.initialValues);
     const [errors, setErrors] = useState({});
     const validateRef = useRef(false);
-=======
-export default function Form({ formData, onSubmit, children }) {
-  const [values, setValues] = useState(formData.initialValues);
-  const [errors, setErrors] = useState({});
-  const validateRef = useRef(false);
->>>>>>> a5772d8ae17904976f733912174b43548599ab58:components/Form/Form.js
 
   const updateValue = (key, value) => {
     setValues((prevValues) => ({
