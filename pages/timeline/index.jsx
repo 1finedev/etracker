@@ -22,7 +22,7 @@ const Timeline = () => {
           <>LogIn</>
         }
       </button>
-      <button onClick={() => router.push({pathname: '/register', query: {from: 'post'}})}>
+      <button onClick={() => router.push({pathname: '/auth/register', query: {from: 'post'}})}>
         Test
       </button>
     </div>
@@ -35,7 +35,7 @@ export async function getServerSideProps({ req, res }) {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
+        destination: "/auth/login",
       },
     };
   }
