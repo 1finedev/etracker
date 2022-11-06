@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getServerSession } from "../lib/authControllers";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Auth, Button, FormInput } from "../components";
 import Link from "next/link";
+import { AlertContext } from "../Context/AlertContext";
 
 const formData = {
   initialValues: {
@@ -38,6 +39,15 @@ const formData = {
 const Login = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const alertContext = useContext(AlertContext);
+
+  useEffect(() => {
+    alertContext.addAlert({
+      intent: 'error',
+      label: 'password doesn\'t match'
+    })
+  }, []);
+
   const handleSubmit = async (values) => {
     setLoading(true);
     const { username, password } = values;
