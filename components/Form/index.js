@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState, createContext, useRef } from "react";
+import { useEffect, useState, createContext, useRef } from "react";
 
 export const FormContext = createContext(null);
 
-export default function Form({ formData, onSubmit, children }) {
-  const [values, setValues] = useState(formData.initialValues);
-  const [errors, setErrors] = useState({});
-  const validateRef = useRef(false);
+export default function Form({ formData, onSubmit, children, ...others }) {
+    const [values, setValues] = useState(formData.initialValues);
+    const [errors, setErrors] = useState({});
+    const validateRef = useRef(false);
 
   const updateValue = (key, value) => {
     setValues((prevValues) => ({

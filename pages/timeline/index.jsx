@@ -41,15 +41,26 @@ const Timeline = () => {
       >
         {session ? <>Logout</> : <>LogIn</>}
       </button>
-      <button
-        onClick={() =>
-          router.push({ pathname: "/register", query: { from: "post" } })
-        }
-      >
+      <button onClick={() => router.push({pathname: '/auth/register', query: {from: 'post'}})}>
         Test
       </button>
     </div>
   );
 };
+
+export async function getServerSideProps({ req, res }) {
+  const session = await getServerSession(req, res);
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+    };
+  }
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default Timeline;
