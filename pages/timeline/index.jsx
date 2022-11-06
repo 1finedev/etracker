@@ -4,6 +4,7 @@ import axios from "axios";
 import mockData from "./../../mockData.json";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { getServerSession } from "../../lib/authControllers";
 
 const Timeline = () => {
   const router = useRouter();
