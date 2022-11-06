@@ -3,9 +3,9 @@ import { useEffect, useState, createContext, useRef } from "react";
 export const FormContext = createContext(null);
 
 export default function Form({ formData, onSubmit, children, ...others }) {
-    const [values, setValues] = useState(formData.initialValues);
-    const [errors, setErrors] = useState({});
-    const validateRef = useRef(false);
+  const [values, setValues] = useState(formData.initialValues);
+  const [errors, setErrors] = useState({});
+  const validateRef = useRef(false);
 
   const updateValue = (key, value) => {
     setValues((prevValues) => ({
@@ -45,14 +45,15 @@ export default function Form({ formData, onSubmit, children, ...others }) {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    // console.log(Object.keys(errors).length);
-    if (Object.keys(errors).length > 0) {
-      alertContext.addAlert({
-        type: "warning",
-        label: "Please check your inputs",
-      });
-      return;
-    }
+
+    // alert context doesn't exist
+    // if (Object.keys(errors).length > 0) {
+    //   alertContext.addAlert({
+    //     type: "warning",
+    //     label: "Please check your inputs",
+    //   });
+    //   return;
+    // }
     onSubmit(values);
   };
 
