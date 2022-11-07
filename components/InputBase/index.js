@@ -6,7 +6,6 @@ const Input = React.forwardRef(({ color, icon, width, ...props }, ref) => {
 
   return (
     <div className={InputBaseStyles({ color, width, focus })}>
-      {icon && <div className="h-6 w-6 text-slate-500">{icon}</div>}
       <input
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
@@ -14,6 +13,7 @@ const Input = React.forwardRef(({ color, icon, width, ...props }, ref) => {
         ref={ref}
         {...props}
       />
+      {icon && <div className="mr-1 h-6 w-6 text-slate-500">{icon}</div>}
     </div>
   );
 });
