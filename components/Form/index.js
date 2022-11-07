@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useRef } from "react";
+import { useEffect, useState, createContext, useRef, useContext } from "react";
 
 export const FormContext = createContext(null);
 
@@ -73,3 +73,5 @@ export default function Form({ formData, onSubmit, children, ...others }) {
     </FormContext.Provider>
   );
 }
+
+export const useForm = () => useContext(FormContext);

@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { FormContext } from ".";
+import { useForm } from "./";
 import Input from "../InputBase";
 
 export default function FormInput({ input, ...others }) {
   const { field, placeholder, label, type } = input;
-  const { values, errors, updateValue } = useContext(FormContext);
+  const { values, errors, updateValue } = useForm();
 
   return (
     <div className="flex flex-col gap-y-0.5 md:gap-y-1">

@@ -1,11 +1,7 @@
-import AlertContextWrapper from './AlertContext';
+import AlertContextWrapper from "./AlertContext";
 
 const GlobalContext = ({ children }) => {
-    return (
-        <AlertContextWrapper>
-            {children}
-        </AlertContextWrapper>
-    );
-}
+  return <AlertContextWrapper>{children}</AlertContextWrapper>;
+};
 
 export default GlobalContext;
