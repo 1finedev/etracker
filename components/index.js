@@ -6,3 +6,4 @@ export { default as Card } from "./Card";
 export { default as Button } from "./Button";
 export { default as FormInput } from "./Form/FormInput";
 export { default as SocialLogin } from "./SocialLogin";
+export { loginSchema } from "./Form/schemas";

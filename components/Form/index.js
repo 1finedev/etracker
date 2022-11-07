@@ -1,8 +1,9 @@
 import { useEffect, useState, createContext, useRef, useContext } from "react";
-
+import { useAlert } from "../../Context/AlertContext";
 export const FormContext = createContext(null);
 
 export default function Form({ schema, onSubmit, children, ...others }) {
+  const { addAlert } = useAlert();
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   // const validateRef = useRef(false);
@@ -51,12 +52,18 @@ export default function Form({ schema, onSubmit, children, ...others }) {
   //   return;
   // }
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-    const { error, value } = Joi.validate(data, schema);
+    const { error, value } = schema.validate({ ...values });
     // error is a string, should be an object so I can update the error state and it would be displayed in the UI
+
+    addAlert({
+      intent: "error",
+      label: error.message,
+    });
     console.log(error);
-    onSubmit(values);
+    // console.log(values);
+    onSubmit(value);
   };
 
   const formValue = {

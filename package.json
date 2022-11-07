@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.2.4",
     "ip-to-location": "^1.0.1",
+    "joi": "^17.7.0",
     "mongoose": "^6.6.7",
     "next": "12.3.1",
     "next-auth": "^4.15.0",
