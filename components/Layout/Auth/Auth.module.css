@@ -1,5 +1,0 @@
-@layer {
-    .container {
-        @apply w-full h-screen bg-primary flex justify-center items-center 
-    }
-}
