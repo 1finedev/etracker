@@ -2,7 +2,7 @@ import { useForm } from "./";
 import Input from "../InputBase";
 
 export default function FormInput({ input, ...others }) {
-  const { field, placeholder, label, type } = input;
+  const { field, placeholder, label, type, icon } = input;
   const { values, errors, updateValue } = useForm();
 
   return (
@@ -13,6 +13,7 @@ export default function FormInput({ input, ...others }) {
         </div>
       )}
       <Input
+        icon={icon}
         value={values[field] || ""}
         onChange={(e) => updateValue(field, e.target.value)}
         placeholder={placeholder}
