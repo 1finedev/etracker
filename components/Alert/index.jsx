@@ -22,10 +22,13 @@ const Alert = ({ intent, style, label, close, duration }) => {
           style={{ animationDuration: `${duration}ms` }}
         />
       )}
-      <p className="font-bold flex-1 mx-2">{label}</p>
+      <div className="flex flex-col justify-between py-2 px-4">
+        <h5 className="font-semibold uppercase">{intent}</h5>
+        <span className="text-slate-600 text-sm">{label}</span>
+      </div>
       <button
         onClick={close}
-        className="icon h-full px-4 text-xs text-slate-300 border border-l-slate-300"
+        className="icon h-full px-4 text-xs text-slate-400 border border-l-slate-400 ml-auto"
       >
         CLOSE
       </button>
