@@ -2,7 +2,7 @@ import Image from "next/image";
 import Form from "../../Form";
 import { useRouter } from "next/router";
 
-const Auth = ({ formData, handleSubmit, className, children }) => {
+const Auth = ({ formSchema, handleSubmit, className, children }) => {
   const router = useRouter();
 
   return (
@@ -21,7 +21,7 @@ const Auth = ({ formData, handleSubmit, className, children }) => {
         </h5>
       </div>
       <Form
-        formData={formData}
+        schema={formSchema}
         onSubmit={handleSubmit}
         className={`${className} flex flex-col gap-4`}
       >
