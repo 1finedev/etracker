@@ -21,8 +21,8 @@ const AlertContextWrapper = ({ children }) => {
         alertId++;
 
         const newAlert = {
-            // duration: 4700,
-            duration: 8000,
+            duration: 3700,
+            // duration: 8000,
             ...alert,
             id: newId,
         };

@@ -18,44 +18,24 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const formData = {
-    initialValues: {
-      username: "",
-      password: "",
+  const fields = {
+    username: {
+      field: "username",
+      placeholder: "Enter username",
+      label: "Username",
+      type: "text",
     },
-    fields: {
-      username: {
-        field: "username",
-        placeholder: "Enter username",
-        label: "Username",
-        type: "text",
-      },
-      password: {
-        field: "password",
-        placeholder: "Enter password",
-        label: "Password",
-        type: showPassword ? "text" : "password",
-      },
+    password: {
+      field: "password",
+      placeholder: "Enter password",
+      label: "Password",
+      type: showPassword ? "text" : "password",
     },
-    validateForm: {
-      username: (value) => {
-        if (!value || value.trim() === "") return "Username is required";
-      },
-      password: (value) => {
-        if (!value || value.trim() === "") return "Password is required";
-        if (value.length < 6) return "Password is too short";
-      },
-    },
-  };
+  }
 
   const handleSubmit = async (values) => {
     setLoading(true);
     const { username, password } = values;
-
-    addAlert({
-      intent: "error",
-      label: "error",
-    });
 
     const res = await signIn("credentials", {
       redirect: false,
@@ -76,9 +56,9 @@ const Login = () => {
 
   return (
     <Auth formSchema={loginSchema} handleSubmit={handleSubmit}>
-      <FormInput input={formData.fields.username} />
+      <FormInput input={fields.username} />
       <FormInput
-        input={formData.fields.password}
+        input={fields.password}
         icon={
           showPassword ? (
             <svg

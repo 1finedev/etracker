@@ -5,11 +5,11 @@
 @layer Alert {
     .alert {
         transition: bottom 300ms 200ms ease-out, left 500ms ease-out, transform 500ms ease-out, opacity 500ms ease-out;
-        animation: alert-enter 750ms, alert-exit 750ms 4000ms;
+        animation: alert-enter 500ms, alert-exit 500ms 4000ms;
     }
 
     .duration-bar {
-        /* animation: alert-duration-bar-shrink forwards 500ms linear; */
+        animation: alert-duration-bar-shrink forwards 500ms linear;
     }
 
     @keyframes alert-enter {

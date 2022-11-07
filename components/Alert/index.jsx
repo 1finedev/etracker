@@ -3,7 +3,7 @@ import { AlertDurationBarStyles } from "./Alert.variant";
 
 const Alert = ({ intent, style, label, close, duration }) => {
   useEffect(() => {
-    // const timer = setTimeout(close, duration);
+    const timer = setTimeout(close, duration);
     () => {
       clearTimeout(timer);
     };

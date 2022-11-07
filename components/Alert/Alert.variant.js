@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority';
 
 const AlertDurationBarStyles = cva(
-    "duration-bar h-20 w-2 bg-secondary",
+    "duration-bar h-20 w-2 bg-secondary !self-end",
 
     {
         /* variants */

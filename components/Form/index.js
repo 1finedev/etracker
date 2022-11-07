@@ -57,15 +57,16 @@ export default function Form({ schema, onSubmit, children, ...others }) {
     const { error, value } = schema.validate({ ...values }, { abortEarly: false });
     // error is a string, should be an object so I can update the error state and it would be displayed in the UI
 
-    // console.log(values);
-    if (error === undefined) onSubmit(value);
+    console.log('error is', error);
+    if (error === undefined) return onSubmit(value);
 
     // display an error message for each error on the form and add to the error object
     const { message } = error;
     const errObj = {};
     /* 
     very crude method I'm using to create an error property
-    the message is in the format of '"${key}" ${error}'
+    the message is in the format of '"${key}" error message'
+    so I'm matching the key using regex and extracting it
     */
     message.split('.').forEach((errMes) => {
       console.log(errMes);

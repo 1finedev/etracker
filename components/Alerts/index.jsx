@@ -5,7 +5,7 @@ const Alerts = () => {
   const { alerts, removeAlert } = useAlert();
 
   return (
-    <div className="fixed top-8 right-8 z-[20000] w-fit flex flex-col-reverse gap-y-2 transition-all duration-300">
+    <div className="fixed bottom-8 left-1/2 z-[20000] w-fit flex flex-col-reverse gap-y-2 transition-all duration-300">
       {alerts.map((alert) => {
         return (
           <Alert
