@@ -31,7 +31,7 @@ const Login = () => {
       label: "Password",
       type: showPassword ? "text" : "password",
     },
-  }
+  };
 
   const handleSubmit = async (values) => {
     setLoading(true);

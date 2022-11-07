@@ -1,5 +1,5 @@
-import { hashPassword, requestData } from "../../lib/authControllers";
-import { create, find } from "../../lib/dbApi";
+import { hashPassword, requestData } from "../../../lib/authControllers";
+import { create, find } from "../../../lib/dbApi";
 
 const handler = async (req, res) => {
   const { method } = req;
