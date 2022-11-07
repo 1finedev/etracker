@@ -1,0 +1,34 @@
+@layer Alert {
+
+    .alert.success {
+        @apply bg-green-200 text-green-700
+    }
+
+    .alert.success .duration-bar {
+        @apply bg-green-900
+    }
+
+    .alert.info {
+        @apply bg-sky-200 text-sky-600
+    }
+
+    .alert.info .duration-bar {
+        @apply bg-sky-800
+    }
+
+    .alert.warning {
+        @apply bg-yellow-200 text-yellow-600
+    }
+
+    .alert.warning .duration-bar {
+        @apply bg-yellow-800
+    }
+
+    .alert.error {
+        @apply bg-red-200 text-red-600
+    }
+
+    .alert.error .duration-bar {
+        @apply bg-red-800
+    }    
+}
