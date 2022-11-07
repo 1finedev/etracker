@@ -73,7 +73,6 @@ const Login = () => {
             <svg
               onClick={() => setShowPassword(!showPassword)}
               xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-eye-off"
               className="w-6 h-6"
               viewBox="0 0 24 24"
               stroke-width="2"
