@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import InputBaseStyles from "./InputBase.variant";
 
-const Input = React.forwardRef(({ color, icon, width, ...props }, ref) => {
+const Input = React.forwardRef(({ intent, icon, width, ...props }, ref) => {
   const [focus, setFocus] = useState(false);
 
   return (
-    <div className={InputBaseStyles({ color, width, focus })}>
+    <div className={InputBaseStyles({ intent, width, focus })}>
       <input
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}

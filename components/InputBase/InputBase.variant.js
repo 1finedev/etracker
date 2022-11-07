@@ -8,7 +8,7 @@ const InputBaseStyles = cva(
     variants: {
       intent: {
         primary: "bg-white border-gray-100",
-        transparent: "bg-transparent border-gray-200",
+        error: "bg-red-50 border-red-500"
       },
 
       width: {
@@ -18,7 +18,7 @@ const InputBaseStyles = cva(
       },
 
       focus: {
-        true: "!bg-gray-100 border-gray-300",
+        true: "!bg-gray-100 !border-gray-300",
       },
     },
 
