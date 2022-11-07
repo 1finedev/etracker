@@ -75,11 +75,11 @@ const Login = () => {
               xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-6"
               viewBox="0 0 24 24"
-              stroke-width="2"
+              strokeWidth="2"
               stroke="currentColor"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <line x1="3" y1="3" x2="21" y2="21"></line>
@@ -90,14 +90,13 @@ const Login = () => {
             <svg
               onClick={() => setShowPassword(!showPassword)}
               xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-eye"
               className="w-6 h-6"
               viewBox="0 0 24 24"
-              stroke-width="2"
+              strokeWidth="2"
               stroke="currentColor"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <circle cx="12" cy="12" r="2"></circle>
