@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Auth, Button, FormInput, SocialLogin } from "../components";
 import Link from "next/link";
 import { useAlert } from "../Context/AlertContext";
+import { LoginSchema } from "../components/FormSchemas";
 
 const formData = {
   initialValues: {
@@ -45,6 +46,11 @@ const Login = () => {
     setLoading(true);
     const { username, password } = values;
 
+    addAlert({
+      intent: "error",
+      label: 'error',
+    });
+
     const res = await signIn("credentials", {
       redirect: false,
       username,
@@ -63,7 +69,7 @@ const Login = () => {
   };
 
   return (
-    <Auth formData={formData} handleSubmit={handleSubmit}>
+    <Auth formSchema={LoginSchema} handleSubmit={handleSubmit}>
       <FormInput input={formData.fields.username} />
       <FormInput input={formData.fields.password} />
       <Link href={"/forgot-password"}>
