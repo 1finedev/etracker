@@ -13,6 +13,7 @@ export default function FormInput({ input, ...others }) {
         </div>
       )}
       <Input
+        intent={!!errors[field] ? 'error' : 'primary' }
         icon={icon}
         value={values[field] || ""}
         onChange={(e) => updateValue(field, e.target.value)}
@@ -20,10 +21,6 @@ export default function FormInput({ input, ...others }) {
         type={type}
         {...others}
       />
-
-      <div className="text-red-500 text-[10px] md:text-xs italic">
-        {errors[field] || ""}
-      </div>
     </div>
   );
 }
