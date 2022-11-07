@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { Auth, Button, FormInput, SocialLogin } from "../components";
 import Link from "next/link";
 import { useAlert } from "../Context/AlertContext";
+import { registerSchema } from "../components/Form/schemas";
 
 const Register = () => {
   const router = useRouter();
@@ -10,55 +11,30 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const formData = {
-    initialValues: {
-      username: "",
-      displayName: "",
-      password: "",
+  const fields = {
+    username: {
+      field: "username",
+      placeholder: "username",
+      label: "Enter Username",
+      type: "text",
     },
-    fields: {
-      username: {
-        field: "username",
-        placeholder: "username",
-        label: "Enter Username",
-        type: "text",
-      },
-      displayName: {
-        field: "displayName",
-        placeholder: "display name",
-        label: "Enter Display Name",
-        type: "text",
-      },
-      password: {
-        field: "password",
-        placeholder: "password",
-        label: "Enter Password",
-        type: showPassword ? "text" : "password",
-      },
-      passwordConfirm: {
-        field: "passwordConfirm",
-        placeholder: "Enter password again",
-        label: "confirm Password",
-        type: showPassword ? "text" : "password",
-      },
+    displayName: {
+      field: "displayName",
+      placeholder: "display name",
+      label: "Enter Display Name",
+      type: "text",
     },
-    validateForm: {
-      username: (value) => {
-        if (!value || value.trim() === "") return "Username is required!";
-        if (value.length < 2) return "Username is too short!";
-        if (value.length > 20) return "Username is too long!";
-      },
-      displayName: (value) => {
-        if (!value || value.trim() === "") return "Display name is required!";
-        if (value.length > 40) return "Display name is too long!";
-      },
-      password: (value) => {
-        if (!value || value.trim() === "") return "Password is required!";
-        if (value.length < 6) return "Password is too short";
-      },
-      passwordConfirm: (value) => {
-        // password confirmation validation
-      },
+    password: {
+      field: "password",
+      placeholder: "password",
+      label: "Enter Password",
+      type: showPassword ? "text" : "password",
+    },
+    passwordConfirm: {
+      field: "passwordConfirm",
+      placeholder: "Enter password again",
+      label: "confirm Password",
+      type: showPassword ? "text" : "password",
     },
   };
 
@@ -110,11 +86,11 @@ const Register = () => {
   );
 
   return (
-    <Auth formData={formData} handleSubmit={handleSubmit}>
-      <FormInput input={formData.fields.username} />
-      <FormInput input={formData.fields.displayName} />
-      <PasswordInput input={formData.fields.password} />
-      <PasswordInput input={formData.fields.passwordConfirm} />
+    <Auth formSchema={registerSchema} handleSubmit={handleSubmit}>
+      <FormInput input={fields.username} />
+      <FormInput input={fields.displayName} />
+      <PasswordInput input={fields.password} />
+      <PasswordInput input={fields.passwordConfirm} />
       <Link href={"/forgot-password"}>
         <a className="ml-auto underline underline-offset-2 text-sm font-medium hover:font-bold hover:text-primary">
           Forgot Password?
