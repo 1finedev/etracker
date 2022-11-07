@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getServerSession } from "../lib/authControllers";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import { Auth, Button, FormInput } from "../components";
+import { Auth, Button, FormInput, SocialLogin } from "../components";
 import Link from "next/link";
 import { useAlert } from "../Context/AlertContext";
 
@@ -14,14 +14,14 @@ const formData = {
   fields: {
     username: {
       field: "username",
-      placeholder: "username",
-      label: "Enter username",
+      placeholder: "Enter username",
+      label: "Username",
       type: "text",
     },
     password: {
       field: "password",
-      placeholder: "password",
-      label: "Enter password",
+      placeholder: "Enter password",
+      label: "Password",
       type: "password",
     },
   },
@@ -41,13 +41,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const { addAlert } = useAlert();
 
-  useEffect(() => {
-    addAlert({
-      intent: "error",
-      label: "password doesn't match",
-    });
-  }, []);
-
   const handleSubmit = async (values) => {
     setLoading(true);
     const { username, password } = values;
@@ -58,33 +51,47 @@ const Login = () => {
       password,
     });
     setLoading(false);
-    res.ok === true && router.push("/timeline");
-    console.log(res);
+
+    if (res.ok === true) {
+      router.push("/timeline");
+    } else {
+      addAlert({
+        intent: "error",
+        label: res.error,
+      });
+    }
   };
 
   return (
     <Auth formData={formData} handleSubmit={handleSubmit}>
       <FormInput input={formData.fields.username} />
       <FormInput input={formData.fields.password} />
-
       <Link href={"/forgot-password"}>
-        <a className="ml-auto text-sm font-medium hover:font-bold hover:text-primary">
-          Forgot Password
+        <a className="ml-auto underline underline-offset-2 text-sm font-medium hover:font-bold hover:text-primary">
+          Forgot Password?
         </a>
       </Link>
+      <div className="w-full flex flex-col items-center justify-center mt-[30px]">
+        <Button
+          size={"half"}
+          type={"submit"}
+          loading={loading}
+          disabled={loading}
+        >
+          Login
+        </Button>
+      </div>
 
-      <Button type={"submit"} loading={loading} disabled={loading}>
-        Log in
-      </Button>
-
-      <div className="mt-[10px]">
+      <h6 className="text-center my-[20px]">Or Login With:</h6>
+      <SocialLogin />
+      <h5 className="mt-[50px] text-center">
         Don&apos;t have an account?{" "}
-        <Link href={"register"}>
+        <Link href={"/register"}>
           <span className="text-primary font-medium hover:font-bold">
             Register
           </span>
         </Link>
-      </div>
+      </h5>
     </Auth>
   );
 };

@@ -36,10 +36,10 @@ export default function Form({ formData, onSubmit, children, ...others }) {
   useEffect(() => {
     if (!validateRef.current) {
       validateRef.current = true;
+      validate();
       return;
     }
 
-    validate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values]);
 

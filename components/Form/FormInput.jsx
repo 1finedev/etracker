@@ -6,7 +6,7 @@ export default function FormInput({ input, ...others }) {
   const { values, errors, updateValue } = useForm();
 
   return (
-    <div className="flex flex-col gap-y-0.5 md:gap-y-1">
+    <div className="flex flex-col gap-y-[5px] md:gap-y-1">
       {label !== "" && (
         <div className="capitalize font-medium text-sm md:text-base">
           {label}:

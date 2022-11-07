@@ -1,24 +1,29 @@
 import Image from "next/image";
-import Card from "../../Card";
 import Form from "../../Form";
-import AuthStyles from "./Auth.module.css";
+import { useRouter } from "next/router";
 
 const Auth = ({ formData, handleSubmit, className, children }) => {
+  const router = useRouter();
+
   return (
-    <div className={AuthStyles.container}>
-      <Card
-        flexDisplay={"col"}
-        className="w-[90vw] py-[30px] md:w-2/3 lg:w-1/3"
-      >
+    <div
+      className={`${
+        router.pathname === "/register" ? " py-[25px]" : "py-[50px]"
+      } w-full h-screen bg-white px-[20px]`}
+    >
+      <div className="flex flex-col justify-center mb-[30px]">
         <Image src={"/Logo.svg"} alt="logo" width={64} height={64} />
-        <Form
-          formData={formData}
-          onSubmit={handleSubmit}
-          className={`${className} flex flex-col gap-4`}
-        >
-          {children}
-        </Form>
-      </Card>
+        <h5 className="text-center mt-1">
+          {router.pathname === "/register" ? "Join" : null} SoroSoke NG
+        </h5>
+      </div>
+      <Form
+        formData={formData}
+        onSubmit={handleSubmit}
+        className={`${className} flex flex-col gap-4`}
+      >
+        {children}
+      </Form>
     </div>
   );
 };
