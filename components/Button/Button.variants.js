@@ -27,7 +27,7 @@ const ButtonStyles = cva(
       /* button padding */
       padding: {
         tight: "p-1",
-        normal: "p-2",
+        normal: "px-2 py-3",
         wide: "p-4",
       },
     },

@@ -77,7 +77,7 @@ const Register = () => {
           Forgot Password?
         </a>
       </Link>
-      <div className="w-full flex flex-col items-center justify-center mt-[20px]">
+      <div className="w-full flex flex-col items-center justify-center mt-[10px]">
         <Button
           size={"half"}
           type={"submit"}
@@ -91,7 +91,7 @@ const Register = () => {
       <h6 className="text-center my-[10px]">Or Register With:</h6>
       <SocialLogin />
 
-      <h5 className="mt-[20px] text-center">
+      <h5 className="mt-[10px] text-center">
         Already have an account?{" "}
         <Link href={"/login"}>
           <span className="text-primary font-medium hover:font-bold">

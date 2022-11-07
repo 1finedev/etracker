@@ -8,7 +8,7 @@ const Auth = ({ formData, handleSubmit, className, children }) => {
   return (
     <div
       className={`${
-        router.pathname === "/register" ? " py-[25px]" : "py-[50px]"
+        router.pathname === "/register" ? " py-[20px]" : "py-[50px]"
       } w-full h-screen bg-white px-[20px]`}
     >
       <div className="flex flex-col justify-center mb-[30px]">
