@@ -1,5 +1,6 @@
 import { getServerSession, requestData } from "./../../lib/authControllers";
-import { create, findById } from "../../lib/dbApi";
+import { create } from "../../lib/model";
+const slugify = require("slugify");
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -22,7 +23,7 @@ const handler = async (req, res) => {
 
   // create a new post...
   try {
-    const { title, content, verified } = req.body;
+    const { title, content } = req.body;
 
     if (!title || !content)
       return res.status(400).json({
@@ -36,20 +37,16 @@ const handler = async (req, res) => {
         message: "Invalid post data",
       });
 
-    const createPost = await create("Post", {
+    const newPost = await create("Post", {
+      slug: slugify(title, { lower: true }),
       title,
       content,
-      createdAt: new Date(Date.now()),
       author: session.user._id,
-      // verifiedAuthor: session.user.verified ? true : false,
-      verifiedAuthor: verified ? true : false,
       city,
       country,
       latitude,
       longitude,
     });
-
-    const newPost = await findById("Post", createPost.insertedId);
 
     res.status(201).json({
       status: "Success",
