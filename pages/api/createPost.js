@@ -1,5 +1,6 @@
 import { getServerSession, requestData } from "./../../lib/authControllers";
-import { create, findOne } from "../../lib/model";
+import { create } from "../../lib/model";
+const slugify = require("slugify");
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -37,7 +38,7 @@ const handler = async (req, res) => {
       });
 
     const newPost = await create("Post", {
-      slug,
+      slug: slugify(title, { lower: true }),
       title,
       content,
       author: session.user._id,
