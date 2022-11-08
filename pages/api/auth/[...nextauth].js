@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyPassword } from "../../../lib/authControllers";
-import { find } from "../../../lib/dbApi";
+import { supabase } from "../../../lib/model";
 
 export const authOptions = {
   session: {
@@ -19,12 +19,14 @@ export const authOptions = {
 
         // 2. init user and check if user exists in DB
         try {
-          const data = await find("User", {
-            username,
-          });
-          const user = data.documents[0];
+          const { data, error } = await supabase
+            .from("Users")
+            .select("*")
+            .match({ username })
+            .limit(1);
+          const user = data.data[0];
 
-          if (!user) {
+          if (!user.id) {
             throw new Error("User not found!");
           }
           //3) Verify user Password
@@ -32,7 +34,7 @@ export const authOptions = {
             throw new Error("Incorrect password");
           }
 
-          if (user.active) {
+          if (!user.active) {
             throw new Error("Account has been suspended!");
           }
 

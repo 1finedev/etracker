@@ -1,5 +1,5 @@
 import { getServerSession } from "./../../lib/authControllers";
-import { findByIdAndDelete } from "../../lib/dbApi";
+import { findByIdAndDelete } from "../../lib/model";
 
 const handler = async (req, res) => {
   const { method } = req;
