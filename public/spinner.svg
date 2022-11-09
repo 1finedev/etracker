@@ -74,7 +74,7 @@
         { mime: 'application/xml', useXMLparser: true },
         { mime: 'image/svg+xml', useXMLparser: true },
       ];
-      let typeEl = args.find(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
+      let typeEl = args.findOne(arg => (typeof arg === 'object') && (typeof arg.type === 'string') && (arg.type));
 
       if (typeof typeEl !== 'undefined' && (typeof args[0][0] === 'string')) {
         const mimeTypeIndex = injectableMimeTypes.findIndex(mimeType => mimeType.mime.toLowerCase() === typeEl.type.toLowerCase());

@@ -1,5 +1,5 @@
 import { hashPassword, requestData } from "../../../lib/authControllers";
-import { create, find } from "../../../lib/dbApi";
+import { create, findOne } from "../../../lib/model";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -21,10 +21,11 @@ const handler = async (req, res) => {
 
   try {
     // check if username has been taken
-    const existingUser = await find("User", {
+    const existingUser = await findOne("Users", {
       username: username.toLowerCase(),
     });
-    if (existingUser?.documents.length > 0)
+
+    if (existingUser?.data.length > 0)
       return res.status(409).json({
         status: "Error",
         message: "Username has already been taken",
@@ -33,7 +34,7 @@ const handler = async (req, res) => {
     //  create a new user
     const modifiedPass = await hashPassword(password);
 
-    await create("User", {
+    const data = await create("Users", {
       username: username.toLowerCase(),
       password: modifiedPass,
       displayName,
@@ -43,10 +44,12 @@ const handler = async (req, res) => {
       userCountry: country,
       userCity: city,
       userTimezone: timezone,
-      createdAt: new Date(Date.now()),
     });
 
-    return res.redirect("/timeline");
+    return res.status(201).json({
+      status: "Success",
+      data,
+    });
   } catch (error) {
     return res.status(500).json({
       status: "Error",

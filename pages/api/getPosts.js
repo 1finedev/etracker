@@ -1,5 +1,5 @@
 import { getServerSession } from "../../lib/authControllers";
-import { aggregate } from "../../lib/dbApi";
+import { aggregate } from "../../lib/model";
 
 const handler = async (req, res) => {
   const { method } = req;

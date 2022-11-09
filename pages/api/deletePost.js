@@ -1,5 +1,5 @@
 import { getServerSession } from "./../../lib/authControllers";
-import { findByIdAndDelete } from "../../lib/dbApi";
+import { findByIdAndDelete } from "../../lib/model";
 
 const handler = async (req, res) => {
   const { method } = req;
@@ -29,10 +29,11 @@ const handler = async (req, res) => {
         message: "Post Id is required!",
       });
 
-    await findByIdAndDelete("Post", postId);
+    const data = await findByIdAndDelete("Posts", postId);
 
     res.status(204).json({
       status: "Success",
+      data,
     });
   } catch (error) {
     res.status(500).json({

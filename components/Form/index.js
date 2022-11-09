@@ -34,30 +34,14 @@ export default function Form({ schema, onSubmit, children, ...others }) {
     setErrors(newErrors);
   };
 
-  // useEffect(() => {
-  //   if (!validateRef.current) {
-  //     validateRef.current = true;
-  //     validate();
-  //     return;
-  //   }
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [values]);
-  // alert context doesn't exist
-  // if (Object.keys(errors).length > 0) {
-  //   alertContext.addAlert({
-  //     type: "warning",
-  //     label: "Please check your inputs",
-  //   });
-  //   return;
-  // }
-
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const { error, value } = schema.validate({ ...values }, { abortEarly: false });
-    // error is a string, should be an object so I can update the error state and it would be displayed in the UI
 
-    console.log('error is', error);
+    const { error, value } = schema.validate(
+      { ...values },
+      { abortEarly: false }
+    );
+
     if (error === undefined) return onSubmit(value);
 
     // display an error message for each error on the form and add to the error object
@@ -68,8 +52,7 @@ export default function Form({ schema, onSubmit, children, ...others }) {
     the message is in the format of '"${key}" error message'
     so I'm matching the key using regex and extracting it
     */
-    message.split('.').forEach((errMes) => {
-      console.log(errMes);
+    message.split(".").forEach((errMes) => {
       const key = errMes.match(/"([^']+)"/)[1];
       errObj[key] = true;
       addAlert({
@@ -78,7 +61,6 @@ export default function Form({ schema, onSubmit, children, ...others }) {
       });
     });
 
-    console.log(errObj);
     setErrors(errObj);
   };
 
