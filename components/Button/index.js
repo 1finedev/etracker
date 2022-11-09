@@ -1,3 +1,4 @@
+import LoadingSpinner from "../LoadingSpinner";
 import ButtonStyles from "./Button.variants";
 
 export default function Button({
@@ -11,7 +12,6 @@ export default function Button({
   loading,
   type = "button",
 }) {
-  const buttonIcon = loading ? "/spinner.svg" : icon;
   const onClickHandler = (e) => {
     if (type === "submit") return;
     if (disabled || loading || !onClick) return e.preventDefault;
@@ -25,7 +25,20 @@ export default function Button({
       type={type}
       disabled={disabled}
     >
-      {(!!icon || loading) && <img src={buttonIcon} className="w-10 h-10" />}
+      <div className="h-10 w-fit">
+        {
+          !loading ?
+            (
+              <>
+                {!!icon && <img src={buttonIcon} className="w-10 h-full" />}
+              </>
+            )
+            :
+            (
+              <LoadingSpinner />
+            )
+        }
+      </div>
       <span className="p-0">{loading ? "Please Wait" : children}</span>
     </button>
   );

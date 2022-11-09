@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 const ButtonStyles = cva(
   /* button base style */
-  "h-fit border-2 transition-colors duration-150 font-secondary text-sm md:text-base flex justify-center items-center disabled:hover:bg-gray-300 disabled:hover:text-gray-500 disabled:cursor-not-allowed capitalize rounded-lg flex  font-medium hover:font-semibold",
+  "h-fit min-h-[44px] border-2 transition-colors duration-150 font-secondary text-sm md:text-base flex justify-center items-center disabled:hover:bg-gray-300 disabled:hover:text-gray-500 disabled:cursor-not-allowed capitalize rounded-lg flex  font-medium hover:font-semibold",
   {
     variants: {
       /* button colors */
