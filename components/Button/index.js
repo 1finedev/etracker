@@ -25,7 +25,7 @@ export default function Button({
       type={type}
       disabled={disabled}
     >
-      <div className="h-10 w-fit">
+      <div className="w-fit">
         {
           !loading ?
             (
