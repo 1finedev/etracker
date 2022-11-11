@@ -87,16 +87,18 @@ const Register = () => {
 
   return (
     <Auth formSchema={registerSchema} handleSubmit={handleSubmit}>
-      <FormInput input={fields.username} />
-      <FormInput input={fields.displayName} />
-      <PasswordInput input={fields.password} />
-      <PasswordInput input={fields.passwordConfirm} />
+      <div className="grid grid-cols-2 gap-4">
+        <FormInput input={fields.username} />
+        <FormInput input={fields.displayName} />
+        <PasswordInput input={fields.password} />
+        <PasswordInput input={fields.passwordConfirm} />
+      </div>
       <Link href={"/forgot-password"}>
         <a className="ml-auto underline underline-offset-2 text-sm font-medium hover:font-bold hover:text-primary">
           Forgot Password?
         </a>
       </Link>
-      <div className="w-full flex flex-col items-center justify-center mt-[10px]">
+      <div className="w-full flex flex-col items-center justify-center">
         <Button
           size={"half"}
           type={"submit"}
@@ -107,10 +109,10 @@ const Register = () => {
         </Button>
       </div>
 
-      <h6 className="text-center my-[10px]">Or Register With:</h6>
+      <h6 className="text-center">Or Register With:</h6>
       <SocialLogin />
 
-      <h5 className="mt-[10px] text-center">
+      <h5 className="text-center">
         Already have an account?{" "}
         <Link href={"/login"}>
           <span className="text-primary font-medium hover:font-bold">
