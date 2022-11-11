@@ -29,6 +29,7 @@ export const authOptions = {
           if (!user.id) {
             throw new Error("User not found!");
           }
+
           //3) Verify user Password
           if (!(await verifyPassword(password, user.password))) {
             throw new Error("Incorrect password");
@@ -61,7 +62,6 @@ export const authOptions = {
     async session({ session, token }) {
       token && (session.user = token.user);
       session.password = undefined;
-      session.userIp = undefined;
       return session;
     },
     async jwt({ token, user }) {
