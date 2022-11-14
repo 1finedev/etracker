@@ -24,7 +24,9 @@ export default function Home() {
     console.log(locate);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    locate();
+  }, []);
 
   return (
     <div className="w-full h-[100vh] bg-primary flex flex-col justify-center items-center">
