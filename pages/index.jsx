@@ -1,21 +1,30 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 export default function Home() {
   const router = useRouter();
 
   const redirect = useRef(false);
-  useEffect(() => {
-    if (!redirect.current) {
-      redirect.current = true;
-      const timeout = setTimeout(() => {
-        router.push("/timeline");
-      }, 2000);
+  // useEffect(() => {
+  //   if (!redirect.current) {
+  //     redirect.current = true;
+  //     const timeout = setTimeout(() => {
+  //       router.push("/timeline");
+  //     }, 2000);
 
-      () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [router]);
+  //     () => {
+  //       clearTimeout(timeout);
+  //     };
+  //   }
+  // }, [router]);
+
+  const locate = async () => {
+    const locate = await axios.get("/api/locate");
+
+    console.log(locate);
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="w-full h-[100vh] bg-primary flex flex-col justify-center items-center">
